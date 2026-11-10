@@ -19,7 +19,7 @@ async function init() {
     if (!r.ok) throw new Error("HTTP " + r.status);
     products = await r.json();
     if (!Array.isArray(products) || !products.length) throw new Error("Catálogo vacío");
-    buildFilters(); render(); bind(); counters(); observeAll(); buildRing(); startParticles(); startMagnetic(); startSpotlight(); startCounters(); startHeroScroll();
+    buildFilters(); render(); bind(); counters(); observeAll(); buildRing(); startParticles(); startMagnetic(); startSpotlight(); startCounters(); startHeroScroll(); startLetters(); startGridTilt(); startMarqueeSkew();
 
   } catch (err) {
     console.error("VMF:", err);
@@ -215,6 +215,58 @@ function bindTilt() {
 }
 
 init();
+
+/* ============ LETRAS 3D EN TÍTULOS ============ */
+function startLetters() {
+  document.querySelectorAll(".sec-head h2, .story-text h2, .ed-title span, .contact-title").forEach(h => {
+    if (h._split) return; h._split = true;
+    const text = h.textContent;
+    h.textContent = "";
+    let delay = 0;
+    [...text].forEach(ch => {
+      const s = document.createElement("span");
+      if (ch === " ") { s.className = "lt space"; h.appendChild(s); return; }
+      s.className = "lt"; s.textContent = ch;
+      s.style.transition = `opacity .8s cubic-bezier(.19,1,.22,1) ${delay.toFixed(2)}s, transform .8s cubic-bezier(.19,1,.22,1) ${delay.toFixed(2)}s`;
+      h.appendChild(s); delay += 0.045;
+    });
+  });
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .3 });
+  document.querySelectorAll(".lt").forEach(() => {});
+  document.querySelectorAll(".sec-head h2, .story-text h2, .ed-title span, .contact-title").forEach(h => io.observe(h));
+}
+
+/* ============ CUADRÍCULA 3D QUE SIGUE EL CURSOR ============ */
+function startGridTilt() {
+  if (reduceMotion || !matchMedia("(hover:hover)").matches) return;
+  const grid = document.querySelector(".grid"); if (!grid) return;
+  const wrap = document.createElement("div"); wrap.className = "grid-wrap";
+  grid.parentNode.insertBefore(wrap, grid); wrap.appendChild(grid);
+  wrap.addEventListener("mousemove", e => {
+    const r = wrap.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    grid.classList.add("grid-tilt");
+    grid.style.setProperty("--gx", (y * -3).toFixed(2) + "deg");
+    grid.style.setProperty("--gy", (x * 3).toFixed(2) + "deg");
+  });
+  wrap.addEventListener("mouseleave", () => grid.classList.remove("grid-tilt"));
+}
+
+/* ============ MARQUESINAS QUE REACCIONAN AL SCROLL ============ */
+function startMarqueeSkew() {
+  if (reduceMotion) return;
+  const mq = document.querySelector(".marquee-track"); if (!mq) return;
+  const box = mq.parentElement;
+  let lastY = scrollY, skew = 0, tick = false;
+  const update = () => {
+    const dy = scrollY - lastY; lastY = scrollY;
+    skew += (Math.max(Math.min(dy * .35, 10), -10) - skew) * .1;
+    box.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+    tick = false;
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
 
 /* ============ CARRUSEL 3D GIRATORIO ============ */
 function buildRing() {
