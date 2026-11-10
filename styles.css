@@ -172,7 +172,7 @@ h2{font-size:clamp(42px,6vw,76px);line-height:1.05}
 .empty button{border:0;background:none;color:var(--gold);text-decoration:underline;cursor:pointer}
 
 /* ---------- editorial ---------- */
-/* */height:82vh;min-height:500px;display:flex;align-items:center;overflow:hidden;margin-top:60px}
+.editorial{position:relative;height:82vh;min-height:500px;display:flex;align-items:center;overflow:hidden;margin-top:60px}
 .ed-img{position:absolute;inset:-16% 0}
 .ed-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(.9)}
 .editorial:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 30% 50%,transparent 20%,#0a0906e0 85%)}
