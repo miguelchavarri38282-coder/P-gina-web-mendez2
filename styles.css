@@ -91,6 +91,22 @@ h2 em{font-style:italic;color:var(--gold)}
 .cta-ghost{display:inline-flex;align-items:center;padding:17px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#e8e1d1;border:1px solid #ffffff2e;clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,0 100%);transition:border-color .35s,color .35s}
 .cta-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
+/* ---------- foco de luz + partículas ---------- */
+.spotlight{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(320px circle at var(--mx,-500px) var(--my,-500px),#d8b8780e,transparent 65%)}
+#particles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.7}
+
+/* ---------- carrusel 3D ---------- */
+.carousel-sec{padding:130px 0 90px;overflow:hidden}
+.scene{height:clamp(300px,42vw,440px);perspective:1400px;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:pan-y}
+.scene:active{cursor:grabbing}
+.ring{position:relative;width:clamp(180px,24vw,280px);height:clamp(240px,32vw,370px);transform-style:preserve-3d;will-change:transform}
+.ring .panel{position:absolute;inset:0;border-radius:10px;overflow:hidden;border:1px solid #d8b87844;box-shadow:0 30px 60px -20px #000e,0 0 40px #d8b87818;backface-visibility:hidden;background:#161310;transition:filter .4s}
+.ring .panel img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none;filter:brightness(.85)}
+.ring .panel:hover img{filter:brightness(1.05)}
+.ring .panel:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0a090680,transparent 45%)}
+.ring .panel span{position:absolute;bottom:12px;left:14px;right:14px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;color:var(--gold2)}
+.carousel-hint{text-align:center;font-size:9px;letter-spacing:4px;color:#8f8775;margin-top:34px}
+
 /* ---------- marquesina ---------- */
 .marquee{position:relative;z-index:2;border-block:1px solid var(--line);background:#0d0c08;overflow:hidden;padding:16px 0}
 .marquee-track{display:flex;gap:34px;align-items:center;white-space:nowrap;width:max-content;animation:slide 28s linear infinite}
@@ -254,4 +270,6 @@ footer .brand b{color:var(--gold)}
   .hero-img.main img{opacity:1;transform:none}
   .hero-img.float{opacity:.92}
   .grain{display:none}
+  .spotlight,#particles{display:none}
+  .ring{transform:none!important}
 }

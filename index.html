@@ -18,6 +18,8 @@
 <div class="grain"></div>
 <div class="glow glow-a"></div>
 <div class="glow glow-b"></div>
+<div class="spotlight" id="spotlight"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
 
 <header class="header" id="header">
   <a class="brand" href="#inicio"><span class="brand-mark">VMF</span><span class="brand-name">VARIEDADES <b>MENDEZ FAFFORD</b></span></a>
@@ -47,6 +49,19 @@
     <div class="hero-cta"><a class="cta-solid magnetic" href="#tienda">Explorar la colección</a><a class="cta-ghost magnetic" href="#historia">Nuestra historia</a></div>
   </div>
   <div class="hero-meta"><span>MODA · CALZADO · COMPLEMENTOS</span><span class="scroll-cue">DESLIZA<span></span></span><span>ALMACÉN · VMF</span></div>
+</section>
+
+<!-- ============ CARRUSEL 3D ============ -->
+<section class="carousel-sec" id="destacados">
+  <div class="sec-head">
+    <p class="eyebrow" data-reveal>DESTACADOS DE TEMPORADA</p>
+    <h2 data-reveal>Gira y <em>descubre</em></h2>
+    <p class="muted" data-reveal>Arrastra para girar · toca una pieza para verla</p>
+  </div>
+  <div class="scene" id="scene">
+    <div class="ring" id="ring"></div>
+  </div>
+  <div class="carousel-hint" aria-hidden="true">⟵ ARRASTRA ⟶</div>
 </section>
 
 <!-- ============ MARQUESINA ============ -->
@@ -113,9 +128,9 @@
       <h2 data-reveal>Más que ropa,<br><em>una manera de ser.</em></h2>
       <p data-reveal>Variedades Mendez Fafford reúne opciones de moda para distintos estilos y momentos. Cada pieza de este catálogo fue elegida pensando en ti, con atención personalizada por WhatsApp.</p>
       <div class="stats" data-reveal>
-        <div><b>30</b><span>piezas reales</span></div>
-        <div><b>3</b><span>públicos: dama, caballero, niños</span></div>
-        <div><b>100%</b><span>atención personalizada</span></div>
+        <div><b class="stat" data-count="30">0</b><span>piezas reales</span></div>
+        <div><b class="stat" data-count="3">0</b><span>públicos: dama, caballero, niños</span></div>
+        <div><b class="stat" data-count="100" data-suffix="%">0</b><span>atención personalizada</span></div>
       </div>
     </div>
   </div>

@@ -19,7 +19,8 @@ async function init() {
     if (!r.ok) throw new Error("HTTP " + r.status);
     products = await r.json();
     if (!Array.isArray(products) || !products.length) throw new Error("Catálogo vacío");
-    buildFilters(); render(); bind(); counters(); observeAll();
+    buildFilters(); render(); bind(); counters(); observeAll(); buildRing(); startParticles(); startMagnetic(); startSpotlight(); startCounters(); startHeroScroll();
+
   } catch (err) {
     console.error("VMF:", err);
     const g = $("#products");
@@ -214,3 +215,116 @@ function bindTilt() {
 }
 
 init();
+
+/* ============ CARRUSEL 3D GIRATORIO ============ */
+function buildRing() {
+  const ring = $("#ring"); if (!ring || reduceMotion) return;
+  const ids = ["VMF-029","VMF-006","VMF-004","VMF-020","VMF-012","VMF-016","VMF-001","VMF-008"];
+  const items = ids.map(id => products.find(p => p.id === id)).filter(Boolean);
+  const n = items.length; if (!n) return;
+  const R = Math.round((ring.offsetWidth / 2) / Math.tan(Math.PI / n)) + 90;
+  ring.innerHTML = items.map((p, i) =>
+    `<div class="panel" data-detail="${p.id}" style="transform:rotateY(${i * 360 / n}deg) translateZ(${R}px)"><img src="${img(p)}" alt="${p.producto}" draggable="false"><span>${p.marca || "VMF"} · ${p.codigo || ""}</span></div>`
+  ).join("");
+  let angle = 0, speed = 0.12, target = 0, dragging = false, lastX = 0, vel = 0, paused = false;
+  const scene = $("#scene");
+  scene.addEventListener("pointerdown", e => { dragging = true; lastX = e.clientX; vel = 0; scene.style.cursor = "grabbing"; });
+  addEventListener("pointermove", e => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX; lastX = e.clientX;
+    target += dx * 0.35; vel = dx * 0.35;
+  });
+  addEventListener("pointerup", () => { dragging = false; scene.style.cursor = "grab"; });
+  ring.addEventListener("click", e => { const d = e.target.closest("[data-detail]"); if (d && Math.abs(vel) < 2) details(d.dataset.detail); });
+  const io = new IntersectionObserver(es => es.forEach(en => paused = !en.isIntersecting));
+  io.observe(scene);
+  (function loop() {
+    if (!paused) {
+      target += dragging ? 0 : speed;
+      if (!dragging && Math.abs(vel) > 0.05) { target += vel; vel *= 0.95; }
+      angle += (target - angle) * 0.08;
+      ring.style.transform = `translateZ(-${R}px) rotateY(${angle.toFixed(2)}deg)`;
+    }
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* ============ PARTÍCULAS DORADAS ============ */
+function startParticles() {
+  const c = $("#particles"); if (!c || reduceMotion) return;
+  const ctx = c.getContext("2d"); let W, H, parts = [];
+  const resize = () => { W = c.width = innerWidth; H = c.height = innerHeight; };
+  resize(); addEventListener("resize", resize);
+  for (let i = 0; i < 45; i++) parts.push({
+    x: Math.random() * W, y: Math.random() * H,
+    r: Math.random() * 1.6 + .4, s: Math.random() * .35 + .1,
+    o: Math.random() * .5 + .15, ph: Math.random() * Math.PI * 2
+  });
+  (function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const t = performance.now() / 1000;
+    parts.forEach(p => {
+      p.y -= p.s; if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+      const tw = p.o * (0.6 + 0.4 * Math.sin(t * 2 + p.ph));
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7);
+      ctx.fillStyle = `rgba(216,184,120,${tw.toFixed(2)})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  })();
+}
+
+/* ============ BOTONES MAGNÉTICOS ============ */
+function startMagnetic() {
+  if (reduceMotion || !matchMedia("(hover:hover)").matches) return;
+  document.querySelectorAll(".magnetic").forEach(el => {
+    el.addEventListener("mousemove", e => {
+      const r = el.getBoundingClientRect();
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px,${(e.clientY - r.top - r.height / 2) * .3}px)`;
+    });
+    el.addEventListener("mouseleave", () => el.style.transform = "");
+    el.style.transition = "transform .25s ease-out, background .35s, box-shadow .35s";
+  });
+}
+
+/* ============ FOCO DE LUZ ============ */
+function startSpotlight() {
+  if (reduceMotion) return;
+  const sp = $("#spotlight");
+  addEventListener("pointermove", e => {
+    sp.style.setProperty("--mx", e.clientX + "px");
+    sp.style.setProperty("--my", e.clientY + "px");
+  }, { passive: true });
+}
+
+/* ============ CONTADORES ANIMADOS ============ */
+function startCounters() {
+  const els = document.querySelectorAll(".stat"); if (!els.length || reduceMotion) return;
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; io.unobserve(en.target);
+    const el = en.target, end = +el.dataset.count, suf = el.dataset.suffix || "";
+    const t0 = performance.now();
+    (function tick(now) {
+      const k = Math.min((now - t0) / 1400, 1), ease = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(end * ease) + suf;
+      if (k < 1) requestAnimationFrame(tick);
+    })(t0);
+  }), { threshold: .4 });
+  els.forEach(el => io.observe(el));
+}
+
+/* ============ ROTACIÓN 3D DEL HERO AL DESLIZAR ============ */
+function startHeroScroll() {
+  if (reduceMotion) return;
+  const hero = document.querySelector(".hero"), floats = document.querySelectorAll(".hero-img"), h1 = document.querySelector(".hero h1");
+  let tick = false;
+  const update = () => {
+    const y = Math.min(scrollY, innerHeight);
+    if (y > 0 && hero) {
+      floats.forEach(el => { el.style.translate = `0 ${y * .25}px`; });
+      if (h1) { h1.style.transform = `translateY(${y * .18}px) rotateX(${Math.min(y * .03, 9)}deg)`; h1.style.opacity = Math.max(1 - y / (innerHeight * .7), 0); }
+    }
+    tick = false;
+  };
+  addEventListener("scroll", () => { if (!tick) { requestAnimationFrame(update); tick = true; } }, { passive: true });
+}
+
