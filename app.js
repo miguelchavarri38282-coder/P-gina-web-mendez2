@@ -10,7 +10,7 @@ try {
 } catch (e) { favorites = new Set(); cart = []; }
 const saveState = () => { try { localStorage.setItem("vmf-favs", JSON.stringify([...favorites])); localStorage.setItem("vmf-cart", JSON.stringify(cart)); } catch (e) {} };
 const img = p => `images/${p.id}.jpg`;
-const fallbackImg = e => { e.target.onerror = null; e.target.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="100%" height="100%" fill="#161310"/><text x="50%" y="50%" text-anchor="middle" font-family="serif" font-size="42" fill="#ff4d8d">VMF</text></svg>'); };
+const fallbackImg = e => { e.target.onerror = null; e.target.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="100%" height="100%" fill="#161310"/><text x="50%" y="50%" text-anchor="middle" font-family="serif" font-size="42" fill="#e8b86d">VMF</text></svg>'); };
 
 /* ---------- carga ---------- */
 async function init() {
@@ -202,19 +202,97 @@ function bindMouse() {
   });
 }
 function bindTilt() {
-  if (reduceMotion || !matchMedia("(hover:hover)").matches) return;
+  if (reduceMotion) return;
+  const hover = matchMedia("(hover:hover)").matches;
   document.querySelectorAll(".card-media").forEach(el => {
     if (el._tilt) return; el._tilt = true;
-    el.addEventListener("mousemove", ev => {
-      const r = el.getBoundingClientRect();
-      const x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
-      el.style.transform = `rotateX(${(-y * 7).toFixed(1)}deg) rotateY(${(x * 7).toFixed(1)}deg) scale(1.02)`;
-    });
-    el.addEventListener("mouseleave", () => el.style.transform = "");
+    if (hover) {
+      el.addEventListener("mousemove", ev => {
+        const r = el.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+        el.style.transform = `rotateX(${(-y * 7).toFixed(1)}deg) rotateY(${(x * 7).toFixed(1)}deg) scale(1.02)`;
+      });
+      el.addEventListener("mouseleave", () => el.style.transform = "");
+    } else {
+      el.addEventListener("touchstart", () => el.style.transform = "rotateX(4deg) rotateY(-4deg) scale(1.02)", { passive: true });
+      el.addEventListener("touchend", () => el.style.transform = "", { passive: true });
+    }
   });
 }
 
 init();
+
+/* ============ WEBGL PREMIUM (Three.js) ============ */
+function startWebGL() {
+  const canvas = document.getElementById("webgl");
+  if (!canvas || reduceMotion || !window.THREE) { if (canvas) canvas.style.display = "none"; return; }
+  try {
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.setSize(innerWidth, innerHeight);
+    const flat = document.getElementById("particles"); if (flat) flat.style.display = "none";
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 100);
+    camera.position.z = 14;
+
+    // campo de partículas doradas y moradas con volumen
+    const N = 700, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+    const gold = new THREE.Color(0xe8b86d), purple = new THREE.Color(0x9d6bff);
+    for (let i = 0; i < N; i++) {
+      pos[i * 3] = (Math.random() - .5) * 34;
+      pos[i * 3 + 1] = (Math.random() - .5) * 22;
+      pos[i * 3 + 2] = (Math.random() - .5) * 18;
+      const c = Math.random() < .55 ? gold : purple;
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    const points = new THREE.Points(geo, new THREE.PointsMaterial({ size: .07, vertexColors: true, transparent: true, opacity: .85, depthWrite: false }));
+    scene.add(points);
+
+    // anillos 3D giratorios con volumen
+    const rings = [];
+    [[5.4, .055, 0x9d6bff, .5], [7.2, .04, 0xe8b86d, .4], [9.4, .03, 0x5d3fd3, .3]].forEach(([r, tube, color, op], i) => {
+      const m = new THREE.Mesh(
+        new THREE.TorusGeometry(r, tube, 12, 90),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: op })
+      );
+      m.position.z = -6 - i * 3;
+      scene.add(m); rings.push(m);
+    });
+
+    // luz volumétrica simulada: esfera con gradiente
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(3.2, 24, 24),
+      new THREE.MeshBasicMaterial({ color: 0xe8b86d, transparent: true, opacity: .05 })
+    );
+    halo.position.set(6, 3, -8); scene.add(halo);
+    const halo2 = halo.clone(); halo2.material = new THREE.MeshBasicMaterial({ color: 0x9d6bff, transparent: true, opacity: .05 });
+    halo2.position.set(-7, -3, -10); scene.add(halo2);
+
+    let mx = 0, my = 0, visible = true, t = 0;
+    addEventListener("pointermove", e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; }, { passive: true });
+    const io = new IntersectionObserver(es => es.forEach(en => visible = en.isIntersecting));
+    io.observe(canvas);
+    addEventListener("resize", () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (!visible) return;
+      t += .004;
+      points.rotation.y = t * .6; points.rotation.x = my * .12;
+      camera.position.x = mx * 1.6; camera.position.y = -my * 1.1;
+      camera.lookAt(0, 0, -6);
+      rings.forEach((r, i) => { r.rotation.x = t * (1 + i * .3) + i; r.rotation.y = t * (.8 + i * .25); });
+      halo.scale.setScalar(1 + Math.sin(t * 4) * .12);
+      halo2.scale.setScalar(1 + Math.cos(t * 3) * .12);
+      renderer.render(scene, camera);
+    })();
+  } catch (err) { console.warn("WebGL no disponible:", err); canvas.style.display = "none"; }
+}
+startWebGL();
+
 
 /* ============ LETRAS 3D EN TÍTULOS ============ */
 function startLetters() {
@@ -319,7 +397,7 @@ function startParticles() {
       p.y -= p.s; if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
       const tw = p.o * (0.6 + 0.4 * Math.sin(t * 2 + p.ph));
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7);
-      ctx.fillStyle = `rgba(255,77,141,${tw.toFixed(2)})`; ctx.fill();
+      ctx.fillStyle = `rgba(232,184,109,${tw.toFixed(2)})`; ctx.fill();
     });
     requestAnimationFrame(draw);
   })();
