@@ -416,8 +416,53 @@ function startMagnetic() {
   });
 }
 
-/* ============ FOCO DE LUZ ============ */
-function startSpotlight() {
+/* ============ CURSOR PERSONALIZADO + RIPPLE ============ */
+function startCursor() {
+  if (reduceMotion || matchMedia("(hover:none)").matches) return;
+  const dot = $("#cursor-dot"), ring = $("#cursor-ring");
+  let x = -100, y = -100, rx = -100, ry = -100;
+  addEventListener("pointermove", e => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x - 3}px,${y - 3}px)`; }, { passive: true });
+  (function follow() {
+    rx += (x - rx) * .16; ry += (y - ry) * .16;
+    ring.style.transform = `translate(${rx - 17}px,${ry - 17}px)`;
+    requestAnimationFrame(follow);
+  })();
+  document.addEventListener("pointerover", e => {
+    ring.classList.toggle("big", !!e.target.closest("a,button,.card-media,.col-card,.panel"));
+  });
+  document.addEventListener("pointerdown", e => {
+    const b = e.target.closest(".cta-solid,.cta-ghost,.card-actions button,.col-card");
+    if (!b) return;
+    const r = b.getBoundingClientRect(), rip = document.createElement("span");
+    rip.className = "ripple";
+    rip.style.cssText = `width:24px;height:24px;left:${e.clientX - r.left - 12}px;top:${e.clientY - r.top - 12}px`;
+    b.appendChild(rip); setTimeout(() => rip.remove(), 650);
+  });
+}
+startCursor();
+
+/* ============ LETRAS DEL HERO REACTIVAS AL CURSOR ============ */
+function startHeroLetters() {
+  if (reduceMotion || matchMedia("(hover:none)").matches) return;
+  const h1 = document.querySelector(".hero h1"); if (!h1) return;
+  h1.querySelectorAll(".w").forEach(w => {
+    if (w.querySelector("em")) return; // conservar la palabra en cursiva
+    const text = w.textContent; w.textContent = "";
+    [...text].forEach(ch => { const s = document.createElement("span"); s.textContent = ch; s.style.cssText = "display:inline-block;transition:transform .25s ease-out"; w.appendChild(s); });
+  });
+  const hero = document.querySelector(".hero");
+  hero.addEventListener("mousemove", e => {
+    h1.querySelectorAll("span span").forEach(s => {
+      const r = s.getBoundingClientRect();
+      const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+      const lift = Math.max(0, 1 - d / 240);
+      s.style.transform = `translateY(${(-lift * 14).toFixed(1)}px) scale(${1 + lift * .12})`;
+    });
+  });
+}
+startHeroLetters();
+
+/* ============ FOCO DE LUZ ============ */function startSpotlight() {
   if (reduceMotion) return;
   const sp = $("#spotlight");
   addEventListener("pointermove", e => {
