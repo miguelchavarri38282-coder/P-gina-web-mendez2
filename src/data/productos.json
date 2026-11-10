@@ -1,0 +1,559 @@
+[
+  {
+    "id": "VMF-001",
+    "imagen": "65808.jpg",
+    "marca": "RS Men's Wear",
+    "codigo": "RS-16-1071",
+    "codi": "1-8-3",
+    "producto": "Camiseta para caballero con textura y detalle en manga",
+    "colores": [
+      "Beige",
+      "Azul",
+      "Blanco",
+      "Verde Olivo",
+      "Gris",
+      "Rojo Vino"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-002",
+    "imagen": "65804.jpg",
+    "marca": null,
+    "codigo": "KC-48872",
+    "codi": "4-11",
+    "producto": "Pantalón Jean Wide Leg para niña",
+    "colores": [
+      "Azul Jean"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Niños"
+  },
+  {
+    "id": "VMF-003",
+    "imagen": "65798.jpg",
+    "marca": "Paw Patrol",
+    "codigo": null,
+    "codi": null,
+    "producto": "Conjunto infantil de camiseta beige con estampado multicara y short",
+    "colores": [
+      "Multicolor / Beige"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Niños"
+  },
+  {
+    "id": "VMF-004",
+    "imagen": "65801.jpg",
+    "marca": "Latina Style",
+    "codigo": "01-112824",
+    "codi": null,
+    "producto": "Camiseta para dama con estampado de tacón en pedrería (Shopping)",
+    "colores": [
+      "Rosa pastel",
+      "Celeste",
+      "Amarillo pollo",
+      "Negro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-005",
+    "imagen": "65793.jpg",
+    "marca": "Paw Patrol",
+    "codigo": null,
+    "codi": null,
+    "producto": "Conjunto infantil de camiseta con paneles multicolor y short azul marino",
+    "colores": [
+      "Multicolor"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Niños"
+  },
+  {
+    "id": "VMF-006",
+    "imagen": "65796.jpg",
+    "marca": "KanCan",
+    "codigo": "KC-45566",
+    "codi": "4-15",
+    "producto": "Pantalón Jean Wide Leg para dama de tiro alto",
+    "colores": [
+      "Azul Jean deslavado"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-007",
+    "imagen": "65791.jpg",
+    "marca": "Pitbull",
+    "codigo": "PTM-46217",
+    "codi": "4-00",
+    "producto": "Pantalón negro para caballero con faja / cinturón",
+    "colores": [
+      "Negro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-008",
+    "imagen": "65790.jpg",
+    "marca": "Latina Style",
+    "codigo": "01-112907",
+    "codi": null,
+    "producto": "Camiseta para dama con estampado de mariposa (Love Yourself)",
+    "colores": [
+      "Marrón / Café",
+      "Rosa",
+      "Negro",
+      "Blanco",
+      "Celeste"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-009",
+    "imagen": "65788.jpg",
+    "marca": "LACOSTE",
+    "codigo": "LA-MEE001",
+    "codi": "1-85",
+    "producto": "Camiseta básica para caballero",
+    "colores": [
+      "Mostaza",
+      "Anaranjado",
+      "Blanco",
+      "Rojo",
+      "Negro",
+      "Azul"
+    ],
+    "tallas": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-010",
+    "imagen": "65781.jpg",
+    "marca": "TOMMY HILFIGER",
+    "codigo": "TOMSS002",
+    "codi": "2-95",
+    "producto": "Camisa manga corta tipo polo/de vestir para caballero",
+    "colores": [
+      "Azul",
+      "Rosado",
+      "Celeste",
+      "Menta",
+      "Rojo Vino",
+      "Negro"
+    ],
+    "tallas": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-011",
+    "imagen": "65783.jpg",
+    "marca": null,
+    "codigo": null,
+    "codi": null,
+    "producto": "Conjunto de chaleco formal con botones dorados y pantalón largo ancho",
+    "colores": [
+      "Burdeos",
+      "Negro",
+      "Azul marino",
+      "Beige",
+      "Marrón"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-012",
+    "imagen": "65784.jpg",
+    "marca": "Polo Ralph Lauren",
+    "codigo": "POLLS001",
+    "codi": "3-25",
+    "producto": "Camisa de manga larga con botones para caballero",
+    "colores": [
+      "Blanco",
+      "Rosado",
+      "Amarillo",
+      "Azul Oscuro",
+      "Anaranjado",
+      "Rojo Vino"
+    ],
+    "tallas": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-013",
+    "imagen": "65786.jpg",
+    "marca": "Pitbull",
+    "codigo": "PTM-46203",
+    "codi": "3-89",
+    "producto": "Pantalón negro para niño con faja y camiseta tipo polo",
+    "colores": [
+      "Negro / Blanco"
+    ],
+    "tallas": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Niños"
+  },
+  {
+    "id": "VMF-014",
+    "imagen": "65779.jpg",
+    "marca": null,
+    "codigo": "25-39617",
+    "codi": "2-35",
+    "producto": "Falda de jean estilo cargo con bolsillos laterales y blusa blanca corta",
+    "colores": [
+      "Negro"
+    ],
+    "tallas": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-015",
+    "imagen": "65778.jpg",
+    "marca": "Kancan",
+    "codigo": "KC-46285",
+    "codi": "4-12",
+    "producto": "Pantalón jean skinny de tiro alto para dama",
+    "colores": [
+      "Azul oscuro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-016",
+    "imagen": "65776.jpg",
+    "marca": null,
+    "codigo": "Lazo/100",
+    "codi": "6-0",
+    "producto": "Blusa para dama con detalle de lazo, adorno floral en el hombro y encaje en el borde inferior",
+    "colores": [
+      "Vino",
+      "Rosa",
+      "Negro"
+    ],
+    "tallas": [
+      "Talla Única"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-017",
+    "imagen": "65774.jpg",
+    "marca": "Kancan",
+    "codigo": "KC-48864",
+    "codi": "4-11",
+    "producto": "Pantalón jean ancho (wide leg) para niña con cinturón rosado con estrella",
+    "colores": [
+      "Negro"
+    ],
+    "tallas": [
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Niños"
+  },
+  {
+    "id": "VMF-018",
+    "imagen": "65771.jpg",
+    "marca": "Sexy Hip",
+    "codigo": "SXH-46012",
+    "codi": "2-75",
+    "producto": "Pantalón jean skinny de tiro alto para dama",
+    "colores": [
+      "Azul clásico"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-019",
+    "imagen": "65772.jpg",
+    "marca": "Pitbull Jeans",
+    "codigo": "PTM-26664",
+    "codi": "4-65",
+    "producto": "Chaqueta de jean clásica para dama",
+    "colores": [
+      "Azul denim"
+    ],
+    "tallas": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-020",
+    "imagen": "65769.jpg",
+    "marca": null,
+    "codigo": null,
+    "codi": null,
+    "producto": "Sandalias de plataforma con tacón de yute y tiras trenzadas doradas",
+    "colores": [
+      "Dorado"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Calzado",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-021",
+    "imagen": "65767.jpg",
+    "marca": "Kancan",
+    "codigo": "25-40810",
+    "codi": "4-15",
+    "producto": "Pantalón jean estilo wide leg claro de tiro alto para dama",
+    "colores": [
+      "Azul claro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-022",
+    "imagen": "65765.jpg",
+    "marca": "Levi Strauss & Co.",
+    "codigo": "0639",
+    "codi": "3-65",
+    "producto": "Pantalón jean clásico para caballero",
+    "colores": [
+      "Azul oscuro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-023",
+    "imagen": "65763.jpg",
+    "marca": null,
+    "codigo": "41039",
+    "codi": "3-15",
+    "producto": "Pantalón jean recto para caballero con camiseta tipo polo blanca",
+    "colores": [
+      "Azul clásico"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-024",
+    "imagen": "65762.jpg",
+    "marca": "Latina Style",
+    "codigo": "01-112871",
+    "codi": null,
+    "producto": "Camiseta para dama con estampado de perrito con anteojos y lazo",
+    "colores": [
+      "Celeste",
+      "Amarillo pollo",
+      "Negro",
+      "Rosa pastel"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-025",
+    "imagen": "65761.jpg",
+    "marca": "Kancan",
+    "codigo": "25-40705",
+    "codi": "4-34",
+    "producto": "Pantalón jean wide leg con detalles rasgados para dama",
+    "colores": [
+      "Azul claro deslavado"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-026",
+    "imagen": "65759.jpg",
+    "marca": "Pitbull Jeans",
+    "codigo": "25-42239",
+    "codi": "4-65",
+    "producto": "Chaqueta de jean para caballero",
+    "colores": [
+      "Negro"
+    ],
+    "tallas": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Caballero"
+  },
+  {
+    "id": "VMF-027",
+    "imagen": "65757.jpg",
+    "marca": "Kancan",
+    "codigo": "KC-48195",
+    "codi": "3-95",
+    "producto": "Falda de jean negra tipo tubo con cinturón y abertura trasera",
+    "colores": [
+      "Negro"
+    ],
+    "tallas": [
+      "3",
+      "5",
+      "7",
+      "9",
+      "11",
+      "13",
+      "15"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-028",
+    "imagen": "65752.jpg",
+    "marca": "Blondet",
+    "codigo": null,
+    "codi": "7-5",
+    "producto": "Camisa de manga larga con cuello bote adornado con encaje florido",
+    "colores": [
+      "Vino",
+      "Negro",
+      "Blanco",
+      "Rosa"
+    ],
+    "tallas": [
+      "Unitalla"
+    ],
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-029",
+    "imagen": "65745.jpg",
+    "marca": null,
+    "codigo": null,
+    "codi": "2-85",
+    "producto": "Vestido midi con mangas abullonadas y lazo frontal con estampado de mariposas",
+    "colores": [
+      "Azul",
+      "Rojo",
+      "Verde",
+      "Beige"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  },
+  {
+    "id": "VMF-030",
+    "imagen": "65750.jpg",
+    "marca": null,
+    "codigo": null,
+    "codi": null,
+    "producto": "Conjunto formal de chaleco con botones y pantalón largo ancho de talle alto",
+    "colores": [
+      "Burdeos",
+      "Rojo",
+      "Beige",
+      "Negro"
+    ],
+    "tallas": null,
+    "precio": "",
+    "categoria": "Ropa",
+    "publico": "Dama"
+  }
+]
