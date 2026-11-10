@@ -10,7 +10,7 @@ try {
 } catch (e) { favorites = new Set(); cart = []; }
 const saveState = () => { try { localStorage.setItem("vmf-favs", JSON.stringify([...favorites])); localStorage.setItem("vmf-cart", JSON.stringify(cart)); } catch (e) {} };
 const img = p => `images/${p.id}.jpg`;
-const fallbackImg = e => { e.target.onerror = null; e.target.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="100%" height="100%" fill="#161310"/><text x="50%" y="50%" text-anchor="middle" font-family="serif" font-size="42" fill="#d8b878">VMF</text></svg>'); };
+const fallbackImg = e => { e.target.onerror = null; e.target.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><rect width="100%" height="100%" fill="#161310"/><text x="50%" y="50%" text-anchor="middle" font-family="serif" font-size="42" fill="#ff4d8d">VMF</text></svg>'); };
 
 /* ---------- carga ---------- */
 async function init() {
@@ -267,7 +267,7 @@ function startParticles() {
       p.y -= p.s; if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
       const tw = p.o * (0.6 + 0.4 * Math.sin(t * 2 + p.ph));
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7);
-      ctx.fillStyle = `rgba(216,184,120,${tw.toFixed(2)})`; ctx.fill();
+      ctx.fillStyle = `rgba(255,77,141,${tw.toFixed(2)})`; ctx.fill();
     });
     requestAnimationFrame(draw);
   })();
